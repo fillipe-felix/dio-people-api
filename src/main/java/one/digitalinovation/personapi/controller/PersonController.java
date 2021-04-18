@@ -1,6 +1,7 @@
 package one.digitalinovation.personapi.controller;
 
 import one.digitalinovation.personapi.dto.MessageResponseDTO;
+import one.digitalinovation.personapi.dto.request.PersonDTO;
 import one.digitalinovation.personapi.entity.Person;
 import one.digitalinovation.personapi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -26,8 +28,8 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createPerson(@RequestBody Person person) {
-        Person objPerson = personService.createPerson(person);
+    public ResponseEntity<String> createPerson(@RequestBody @Valid PersonDTO personDTO) {
+        Person objPerson = personService.createPerson(personDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objPerson.getId()).toUri();
         if (objPerson == null) {
             return ResponseEntity.badRequest().body("Usuario não foi cadastrado");

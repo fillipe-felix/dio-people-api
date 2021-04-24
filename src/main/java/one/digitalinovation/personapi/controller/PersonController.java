@@ -33,12 +33,9 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<String> createPerson(@RequestBody @Valid PersonDTO personDTO) {
-        Person objPerson = personService.createPerson(personDTO);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objPerson.getId()).toUri();
-        if (objPerson == null) {
-            return ResponseEntity.badRequest().body("Usuario não foi cadastrado");
-        }
-        return ResponseEntity.created(uri).body("Usuario de ID " + objPerson.getId() + " cadastrado com sucesso!!");
+        MessageResponseDTO objMessage = personService.createPerson(personDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objMessage.getId()).toUri();
+        return ResponseEntity.created(uri).body(objMessage.getMessage());
     }
 
     @GetMapping

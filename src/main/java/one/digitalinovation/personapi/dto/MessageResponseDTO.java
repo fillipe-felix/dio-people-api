@@ -7,5 +7,6 @@ import lombok.Data;
 @Builder
 public class MessageResponseDTO {
 
+    private Long id;
     private String message;
 }

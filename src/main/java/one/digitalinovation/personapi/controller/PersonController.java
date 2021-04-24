@@ -32,10 +32,10 @@ public class PersonController {
     private final PersonService personService;
 
     @PostMapping
-    public ResponseEntity<String> createPerson(@RequestBody @Valid PersonDTO personDTO) {
+    public ResponseEntity<MessageResponseDTO> createPerson(@RequestBody @Valid PersonDTO personDTO) {
         MessageResponseDTO objMessage = personService.createPerson(personDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objMessage.getId()).toUri();
-        return ResponseEntity.created(uri).body(objMessage.getMessage());
+        return ResponseEntity.created(uri).body(objMessage);
     }
 
     @GetMapping

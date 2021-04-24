@@ -61,7 +61,7 @@ public class PersonService {
 
         Person savedPerson = personRepository.save(personToUpdate);
 
-        return createMessageResponse("Update person with ID ", savedPerson.getId());
+        return createMessageResponse("Person successfully updated with ID ", savedPerson.getId());
     }
 
     private Person verifyIfExists(Long id) throws PersonNotFoundException {

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/people")
@@ -35,5 +36,10 @@ public class PersonController {
             return ResponseEntity.badRequest().body("Usuario não foi cadastrado");
         }
         return ResponseEntity.created(uri).body("Usuario de ID " + objPerson.getId() + " cadastrado com sucesso!!");
+    }
+
+    @GetMapping
+    public List<PersonDTO> listAll() {
+        return personService.listAll();
     }
 }

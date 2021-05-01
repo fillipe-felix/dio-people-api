@@ -39,6 +39,7 @@ public class PersonServiceTest {
     @InjectMocks
     private PersonService personService;
 
+    //Teste a Pessoa DTO fornecida e, então, retorne a mensagem salva
     @Test
     void testGivenPersonDTOThenReturnSavedMessage() {
 
@@ -62,6 +63,7 @@ public class PersonServiceTest {
                 .build();
     }
 
+    //teste Dado PersonId válido e, então, retorne esta pessoa
     @Test
     void testGivenValidPersonIdThenReturnThisPerson() throws PersonNotFoundException {
         PersonDTO expectedPersonDTO = createFakeDTO();
@@ -80,6 +82,7 @@ public class PersonServiceTest {
         assertEquals(expectedSavedPerson.getFirstName(), personDTO.getFirstName());
     }
 
+    //teste Dado PersonId Inválido e depois ThrowException
     @Test
     void testGivenInvalidPersonIdThenThrowException() {
         var invalidPersonId = 1L;
@@ -89,6 +92,7 @@ public class PersonServiceTest {
         assertThrows(PersonNotFoundException.class, () -> personService.findById(invalidPersonId));
     }
 
+    //teste fornecido sem dados e retorne todas as pessoas registradas
     @Test
     void testGivenNoDataThenReturnAllPeopleRegistered() {
         List<Person> expectedRegisteredPeople = Collections.singletonList(createFakeEntity());
@@ -104,6 +108,7 @@ public class PersonServiceTest {
         assertEquals(expectedPeopleDTOList.get(0).getId(), personDTO.getId());
     }
 
+    //Teste Fornecido ID de Pessoa Válido e Informações de Atualização e Retorne com Sucesso na Atualização
     @Test
     void testGivenValidPersonIdAndUpdateInfoThenReturnSuccesOnUpdate() throws PersonNotFoundException {
         var updatedPersonId = 2L;
@@ -128,6 +133,7 @@ public class PersonServiceTest {
         assertEquals("Person successfully updated with ID 2", successMessage.getMessage());
     }
 
+    //teste Dado PersonId inválido e informações de atualização e, em seguida, lance a exceção na atualização
     @Test
     void testGivenInvalidPersonIdAndUpdateInfoThenThrowExceptionOnUpdate() throws PersonNotFoundException {
         var invalidPersonId = 1L;
@@ -142,6 +148,7 @@ public class PersonServiceTest {
         assertThrows(PersonNotFoundException.class, () -> personService.updateById(invalidPersonId, updatePersonDTORequest));
     }
 
+    //teste Dado PersonId válido e, em seguida, retornar sucesso ao excluir
     @Test
     void testGivenValidPersonIdThenReturnSuccesOnDelete() throws PersonNotFoundException {
         var deletedPersonId = 1L;
@@ -153,6 +160,7 @@ public class PersonServiceTest {
         verify(personRepository, times(1)).deleteById(deletedPersonId);
     }
 
+    //Teste Dado PersonId Inválido e Retorne com Sucesso ao Excluir
     @Test
     void testGivenInvalidPersonIdThenReturnSuccesOnDelete() throws PersonNotFoundException {
         var invalidPersonId = 1L;

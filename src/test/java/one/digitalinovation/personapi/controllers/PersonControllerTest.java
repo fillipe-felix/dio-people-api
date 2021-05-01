@@ -53,6 +53,7 @@ public class PersonControllerTest {
                 .build();
     }
 
+    //teste quando o POST é chamado, então uma pessoa deve ser criada
     @Test
     void testWhenPOSTIsCalledThenAPersonShouldBeCreated() throws Exception {
         PersonDTO expectedPersonDTO = createFakeDTO();
@@ -68,6 +69,7 @@ public class PersonControllerTest {
                 .andExpect(jsonPath("$.message", is(expectedResponseMessage.getMessage())));
     }
 
+    //teste quando GET com válido é chamado, uma pessoa deve ser devolvida
     @Test
     void testWhenGETWithValidIsCalledThenAPersonShouldBeReturned() throws Exception {
         var expectedValidId = 1L;
@@ -84,6 +86,7 @@ public class PersonControllerTest {
                 .andExpect(jsonPath("$.lastName", is("Soares")));
     }
 
+    //teste quando GET com inválido é chamado, então uma mensagem de erro deve ser retornada
     @Test
     void testWhenGETWithInvalidIsCalledThenAnErrorMessagenShouldBeReturned() throws Exception {
         var expectedValidId = 1L;
@@ -97,6 +100,7 @@ public class PersonControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    //teste quando GET é chamado, então a lista de pessoas deve ser retornada
     @Test
     void testWhenGETIsCalledThenPeopleListShouldBeReturned() throws Exception {
         var expectedValidId = 1L;
@@ -114,6 +118,7 @@ public class PersonControllerTest {
                 .andExpect(jsonPath("$[0].lastName", is("Soares")));
     }
 
+    //teste quando PUT é chamado, então uma pessoa deve ser atualizada
     @Test
     void testWhenPUTIsCalledThenAPersonShouldBeUpdated() throws Exception {
         var expectedValidId = 1L;
@@ -129,6 +134,7 @@ public class PersonControllerTest {
                 .andExpect(jsonPath("$.message", is(expectedResponseMessage.getMessage())));
     }
 
+    //teste quando DELETE é chamado, então uma pessoa deve ser excluída
     @Test
     void testWhenDELETEIsCalledThenAPersonShouldBeDeleted() throws Exception {
         var expectedValidId = 1L;

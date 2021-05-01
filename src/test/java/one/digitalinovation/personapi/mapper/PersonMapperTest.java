@@ -16,6 +16,7 @@ public class PersonMapperTest {
     @Autowired
     private PersonMapper personMapper;
 
+    //Teste a Pessoa DTO fornecida e, em seguida, Retorne a Entidade da Pessoa
     @Test
     void testGivenPersonDTOThenReturnPersonEntity() {
         PersonDTO personDTO = PersonUtils.createFakeDTO();
@@ -32,6 +33,7 @@ public class PersonMapperTest {
         assertEquals(phoneDTO.getNumber(), phone.getNumber());
     }
 
+    //teste a entidade de pessoa fornecida e, em seguida, retorne a pessoa
     @Test
     void testGivenPersonEntityThenReturnPersonDTO() {
         Person person = PersonUtils.createFakeEntity();
